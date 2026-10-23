@@ -1,0 +1,36 @@
+# Runs filed in the Lab against an open cell or a shared case, as the status page lists them.
+#
+# A row here is a filed run, not a register record: it has no claim results and is not counted
+# in the totals above it. `operated_by` says who ran it relative to the code under test;
+# `lab_rerun` says what the Lab itself reran, and is "not rerun" when nothing was.
+# tools/gen_status.py renders this file; edit it here, then regenerate.
+
+[[run]]
+id = "nenrin-occurrence-257112c"
+link = "https://github.com/probityai/agent-evidence/issues/29"
+target = "Signature over a canonical JSON record x Occurrence"
+pins = "ogasurfproject-jpg/horizon-shield@257112c33da98b21ba4b2772f98b48e704742106, occurrence-cell-v0"
+operated_by = "author-operated (ogasurfproject-jpg wrote the verifier and the cases)"
+lab_rerun = "2026-10-23: the JS, Python and Go verifiers rerun on the retained in.json give results byte-identical to the retained results files (node 24.19.0, CPython 3.13.15, go 1.26.8); in.json was not regenerated"
+shows = "A signed grant with no receipt, a null receipt and a receipt signed with the caller's key are refused. Row o04, where the caller names itself as provider and signs both halves, is accepted with only a self_authorized finding, so that row does not pass the cell."
+open = "The provider's receipt is a second party's signature, not an outside observation of the run."
+
+[[run]]
+id = "decision-bound-062faff"
+link = "https://github.com/probityai/agent-evidence/issues/25"
+target = "Declarative policy decision point x Effect (file write)"
+pins = "giskard09/execution-join-ref-remora-bridge@062faff640e0800730f2fe47338f90dcfdef9ef6, decision-bound-output-v1; blind readers B (reader.py 5c0a685b) and C (3fbfeade) by ogasurfproject-jpg"
+operated_by = "mechanism and verifier by giskard09; readers B and C written by ogasurfproject-jpg from the mechanism text alone, without the verifier"
+lab_rerun = "2026-10-23: verify_decision_bound.py at 062faff prints ALL 11 CHECKS PASS; decision_bound.py hashes to 3e8f329a, the bytes the blind readers' fence lists"
+shows = "Across rounds at 301b1dc9, 7125f55d, 4cbf5c8 and 062faff the blind reads found a crash on the real-run file, a check order that lived only in code, and three ambiguous rows; each was fixed in the text or the vectors, and at 062faff reader C matches all 11 expected results by name while reader B gives the same verdicts under its own names."
+open = "babyblueviper1's residual: COMMITMENT_AFTER_DECISION shows the output commitment could not exist before the decision, not that the write did not; anyone can bind bytes already written. KNOWN-LIMITATION-COMMITMENT-NOT-WRITE is accepted on purpose. Closing it needs a sink that accepts only bound writes, or an external anchor on both commitments."
+
+[[run]]
+id = "payment-ordering-f82d691"
+link = "https://github.com/probityai/agent-evidence/issues/28"
+target = "Declarative policy decision point x Effect (payment), cross-reference for the request/effect case"
+pins = "babyblueviper1/preaction-governance-conformance@f82d69154d0b5eb9881f1ea1065926f86c33fec8, resolution-payment-pair-v0"
+operated_by = "author-operated (one operator held the verdict key and both wallets; the chain is the outside party)"
+lab_rerun = "2026-10-23: check.py --live matched 10 of 10 cases, with both Base receipts and blocks re-read equal to the pinned fixture"
+shows = "The EIP-3009 nonce equals the verdict's decision_ref, so the authorization could not predate the verdict; exhibit 2, with a random nonce, is refused as payment_does_not_carry_verdict."
+open = "Exhibit 3 stops at UNRESOLVED because no execution policy was committed. A file write needs its bytes or a manifest to commit to the decision reference."
