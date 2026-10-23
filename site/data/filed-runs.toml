@@ -34,3 +34,43 @@ operated_by = "author-operated (one operator held the verdict key and both walle
 lab_rerun = "2026-10-23: check.py --live matched 10 of 10 cases, with both Base receipts and blocks re-read equal to the pinned fixture"
 shows = "The EIP-3009 nonce equals the verdict's decision_ref, so the authorization could not predate the verdict; exhibit 2, with a random nonce, is refused as payment_does_not_carry_verdict."
 open = "Exhibit 3 stops at UNRESOLVED because no execution policy was committed. A file write needs its bytes or a manifest to commit to the decision reference."
+
+[[run]]
+id = "priorseal-exact-call-2ff89d8"
+link = "https://github.com/probityai/agent-evidence/issues/30"
+target = "Signature over a canonical JSON record x Occurrence (case-04); exact-call envelope matrix"
+pins = "imokokok/PriorSeal@2ff89d86611257b4440232e5c2793926b3d52043, contract v1.0.1, report.json 223db155; 1.0.0 delivery d84055319325e6eef5a0a275e0f2f78f5919bdb4"
+operated_by = "author-operated by imokokok; fresh-clone repeats with the published runner by ogasurfproject-jpg and Tetsurohhori; separately written readers by ogasurfproject-jpg (priorseal-reader-v0 at bfde94be9d80), piiiico (gist c81ba92) and Tetsurohhori (1.0.0-text reader at 1c261be), each answer-exposed"
+lab_rerun = "2026-10-13: ogasurfproject-jpg's reader at bfde94be9d80 rerun against 2ff89d86 gave 89 fields equal, 0 different and 13 not comparable"
+shows = "The 1.0.1 readers agree with the profile on all six matrix cases; the 1.0.0-text reader matches bound on 6 of 6 and reason codes on 5 of 6, because that text had no authorization-window row. With no execution evidence, case-04 stays UNDETERMINED: neither an occurrence claim nor a compliance failure."
+open = "Candidate seams G9 to G11, outside the frozen matrix and not rerun by the Lab: G9, a missing executedAt skips both windows in reader.mjs while the profile fails closed; G10, a non-numeric executedAt is passed or crashes the reader and no reader refuses it; G11, chainId as a JSON string gives CHAIN_MISMATCH in the shipped paths and bound in the two readers that follow the 1.0.1 paragraph. Found by piiiico, reproduced by ogasurfproject-jpg and by Tetsurohhori (run record 4bb1e1d). ogasurfproject-jpg's 1bdbebc5 hardens only his own reader and resolves none of them. Each needs a contract decision."
+
+[[run]]
+id = "agentavow-tool-manifest-00e92b0"
+link = "https://github.com/probityai/agent-evidence/issues/50"
+target = "Tool manifest digest x retained local effect"
+pins = "probityai/agent-evidence-observer@00e92b0a3fcf53376ebafc6cc9b4abde7e9fdc8c, fixture 48849607 from AgentAvow@36426cfd5152bba6a27766febfac8aaef47b6f34"
+operated_by = "kenneives ran it as fixture author (macOS arm64); piiiico replayed it as a non-author on Linux aarch64; both ran the same reader code"
+lab_rerun = "not rerun"
+shows = "Both runs give the same six axes and exit 0 for run and verify; with kenneives's recorded runEvaluationTime restored, piiiico's two output files hash to 39097a84 and 7ac2ed4b, the same as his."
+open = "A reproduction on a second platform, not an independent implementation. runGradeAxes.fresh is false at the run clock by design, because the grade expired on 2026-10-02."
+
+[[run]]
+id = "assay-incident-package-4ac01e81"
+link = "https://github.com/probityai/agent-evidence/issues/35"
+target = "Offline incident-package verification under a historical context"
+pins = "Rul1an/assay v6.14.0, source 4ac01e81c2dcfe8b00a139e90b73ea7c2b1a53ce, context as_of 2026-10-17T15:29:00Z"
+operated_by = "author-operated by Rul1an"
+lab_rerun = "not rerun"
+shows = "As filed: the intact package is package_verified with exit 0, and one changed byte inside a retained object is package_refused with reason input_shape and exit 2."
+open = "An outside operator's replay; it would still run Assay's own verifier."
+
+[[run]]
+id = "witness-scope-unevaluated-f451b00"
+link = "https://github.com/probityai/agent-evidence/issues/24#issuecomment-6247272682"
+target = "witness_scope (vocabulary term, proposed) x Reader agreement"
+pins = "astrogilda/agent-control-standard@f451b0089ea98a203bf930a3912deec2b4b4aea0, conformance/basis: basis_adapter.py 0e7195c5, runner.py 11c81e3f, vector.schema.json 83039478, vectors/basis_vectors.json d17faa02"
+operated_by = "historical record by ossumpossum; he reports the rule it tested was struck on 2026-09-16, so there is no live rule to regress against"
+lab_rerun = "2026-10-23: all four blob hashes match the commit, which is still fetchable by SHA; witness_scope appears 0 times in runner.py and basis_adapter.py, and basis_vectors.json carries it on all 25 rows (21 EXTERNAL, 4 SELF)"
+shows = "A conformance rule keyed on a field that artifacts declare but no verifier credits or orders passes or fails by accident, and a runner cannot tell a scope it declined to evaluate from a scope nothing recorded."
+open = "The vocabulary entry is still proposed with no ordering over SELF, PEER and EXTERNAL. A rule over it needs that ordering and a verifier that credits the field."
