@@ -19,11 +19,11 @@
 #
 # Precedent for this shape: IANA JWT claim registry, JSON-LD @context registries.
 #
-# version: "0.6.0"
+# version: "0.7.0"
 # status: "draft - open for review"
 
 meta:
-  version: "0.6.0"
+  version: "0.7.0"
   status: "draft - open for review"
   spec_anchor: "spec/predicates/adversarial-execution-evidence.md"
   spec_anchor_repo: "https://github.com/probityai/agent-evidence-vectors"
@@ -123,6 +123,13 @@ meta:
     third_party_authored: true and declare evidence: asserted, so none promotes
     a term and none is offered as promoting one. The v0.5.0 tag does not carry
     the section.
+    Version 0.7.0 adds commitment_anchor and its required companion
+    anchor_time_rule to evidence_dimensions, both proposed. commitment_anchor
+    names a proven ceiling on when a record existed, the mirror of the floor
+    issuance_time_basis names. It lists invinoveritas as an issuer: its public
+    ledger emits the anchor as ots_anchor, a partial match filed by its own
+    maintainer. Neither term is promoted, because no record yet carries
+    anchor_time_rule on the wire. The v0.6.0 tag does not carry either term.
   opencre_links: >
     A term whose definition states a requirement that one of OpenCRE's Common
     Requirements organizes carries an opencre list. Each item names the CRE by
